@@ -17,3 +17,4 @@ def test_file_does_not_exist():
     assert(res.out_of == 2)
     assert(res.score == 0)
     assert(res.feedback == "The file \"does_not_exist\" is not present")
+

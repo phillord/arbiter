@@ -29,9 +29,25 @@ class Check():
         self.cont = True
         self.results = []
 
+    def log(self, message):
+        print(message)
+
     def result(self,result):
+        self.log(result.feedback)
         self.results.append(result)
         return result
+
+    def ask_for_score(self, question, out_of):
+        print(f"{question}: {out_of}")
+        print("\tPlease Enter Score")
+        score = input()
+        print("\tPlease Enter feedback")
+        feedback = input()
+        self.result(
+            Result(out_of=out_of, score=score, feedback=feedback)
+        )
+
+        return self
 
 ## Result of an individual check
 @dataclass
