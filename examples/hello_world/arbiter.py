@@ -28,8 +28,8 @@ def complex_match():
         ## Get the stdout
         .stdout(
             Match(
-                ["Hello World", "Your program outputs \"Hello World\" as required", 10]
-                ["hello world", "Your program is nearly correct but does not use upper case", 8]
+                ["Hello World", "Your program outputs \"Hello World\" as required", 10],
+                ["hello world", "Your program is nearly correct but does not use upper case", 8],
                 [t, "Your program does not output correctly"]
             )
         )
@@ -53,8 +53,8 @@ def match_with_run_check():
         ## Get the stdout
         .stdout(
             Match(
-                ["Hello World", "Your program outputs \"Hello World\" as required", 10]
-                ["hello world", "Your program is nearly correct but does not use upper case", 8]
+                ["Hello World", "Your program outputs \"Hello World\" as required", 10],
+                ["hello world", "Your program is nearly correct but does not use upper case", 8],
                 [t, "Your program does not output correctly"]
             )
         )

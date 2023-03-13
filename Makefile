@@ -1,2 +1,2 @@
 test:
-	poetry run pytest
+	poetry run pytest -W error::UserWarning
