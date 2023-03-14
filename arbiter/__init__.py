@@ -1,29 +1,44 @@
 from dataclasses import dataclass
 
+## Result of an individual check
+@dataclass
+class Result:
+    out_of: int
+    score: int
+    feedback: str
 
-## Class for handling exercises
-## Use builder pattern, so everything returns Exercise object
 
+## Class for handling Section
+## Use builder pattern, so everything returns Section object
+@dataclass
 class Exercise():
-    def __init__(self):
+    out_of:int
+    title:str
+    results:list[Result, "Exercise"]
+
+    def __init__(self, title, out_of):
+        self.title = title
+        self.out_of = out_of
+        self.results = []
+
+    ## Use a check to record a mark
+    def mark(self, marker):
+        self.results.extend(marker.results)
+        return self
+
+    ## Add a sub exercise
+    def sub(self, exercise):
+        self.results.append(exercise)
+        return self
+
+    ## Check that everything adds up
+    def check():
         pass
 
-    ## Specifies the expected mark
-    ## Complain if we don't get that
-    def expected_total(i):
-        pass
 
-    ## Does something with a checker
-    def mark(checker):
-        pass
-
-    ## Adds a title to the results
-    def heading(title):
-        pass
-
-## Base class for checkers. Builder interface but with an "results"
+## Base class for Markers. Builder interface but with an "results"
 ## method which returns a list of results
-class Check():
+class Marker():
     def __init__(self):
         ## Should we continue or as a result so far meant we need to stop
         self.cont = True
@@ -49,14 +64,8 @@ class Check():
 
         return self
 
-## Result of an individual check
-@dataclass
-class Result:
-    out_of: int
-    score: int
-    feedback: str
 
 ## Class that turns exercise into some consumable format (nicely printed, JSON, what ever)
 class Report:
     def __init__(self,exercise):
-        pass
+        self.exercise = exercise

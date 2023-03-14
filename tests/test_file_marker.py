@@ -1,7 +1,7 @@
-from arbiter.util import FileCheck
+from arbiter.util import FileMarker
 
 def test_test_file_exists():
-    res_list = FileCheck("README.md").exists(2, 1, 0).results
+    res_list = FileMarker("README.md").exists(2, 1, 0).results
     assert(len(res_list) == 1)
     res = res_list[0]
     print(res)
@@ -10,7 +10,7 @@ def test_test_file_exists():
     assert(res.feedback == "The file \"README.md\" exists")
 
 def test_file_does_not_exist():
-    res_list = FileCheck("does_not_exist").exists(2, 1, 0).results
+    res_list = FileMarker("does_not_exist").exists(2, 1, 0).results
     assert(len(res_list) == 1)
     res = res_list[0]
     print(res)

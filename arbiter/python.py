@@ -1,11 +1,11 @@
-from .util import FileCheck
+from .util import FileMarker
 
 import subprocess
 
 ## Class that runs a python file
 
 
-class RunCheck(FileCheck):
+class RunMarker(FileMarker):
     def __init__(self, filename):
         super().__init__(filename)
 
@@ -40,7 +40,3 @@ class RunCheck(FileCheck):
     @property
     def returncode(self):
         return self._completed_process.returncode
-
-    @property
-    def stdout(self):
-        return self._completed_process.stdout

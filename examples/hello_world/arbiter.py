@@ -1,30 +1,34 @@
+from arbiter import Exercise
+from arbiter.python import RunMarker
+
 def direct_match():
-    a = Aribter()
+    e = Exercise("Simple Exercise", 10)
 
     ## Add a single exercise
-    a.exercise(
+    e.mark(
         ## Check based on Running the code
-        Run("hello_world.py")
+        RunMarker("hello_world.py")
         ## Run it
-        .execute()
+        .python()
         ## Get the stdout
         .stdout(
             ## Check that we return hello
             Equals("Hello World", "You program outputs \"Hello World\" as required", 10, 0)
         )
-    )
+    ).check()
 
-    a.complete()
+    return e.report()
+
 
 def complex_match():
-    a = Aribter()
+    e = Exercise()
 
     ## Add a single exercise
-    a.exercise(
+    e.mark(
         ## Check based on Running the code
-        Run("hello_world.py")
+        RunMarker("hello_world.py")
         ## Run it
-        .execute()
+        .python()
         ## Get the stdout
         .stdout(
             Match(
@@ -33,21 +37,21 @@ def complex_match():
                 [t, "Your program does not output correctly"]
             )
         )
-    )
+    ).check()
 
-    a.complete()
+    return e.report()
 
 
 def match_with_run_check():
-    a = Aribter()
+    e = Exercise()
 
     ## Add a single exercise
-    a.exercise(
+    e.mark(
         ## Check based on Running the code
-        Run("hello_world.py")
+        RunMarker("hello_world.py")
         .exists("The file \"hello_world.py\" does not exist", 2, 0)
         ## Run it
-        .execute()
+        .python()
         .success("The file \"hello_world.py\" runs correctly", 2,
                  "The file \"hello_world.py\" does not run correctly", 0)
         ## Get the stdout
@@ -58,6 +62,6 @@ def match_with_run_check():
                 [t, "Your program does not output correctly"]
             )
         )
-    )
+    ).check()
 
-    a.complete()
+    return e.report()

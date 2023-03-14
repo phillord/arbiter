@@ -1,11 +1,11 @@
-from . import Check, Result
+from . import Marker, Result
 import os
 import platform
 import subprocess
 import sys
 
 ## Checker that looks for the existance of files
-class FileCheck(Check):
+class FileMarker(Marker):
     def __init__(self, filename):
         super().__init__()
         self.filename = filename
