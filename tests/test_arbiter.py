@@ -40,11 +40,14 @@ def test_checker_simple():
     assert(e.will_check())
 
 
-# def test_arbiter_section():
-#     section = Section(
-#         "Simple Exercise", 10
-#     ).mark(NullMarker().null_marker(2, 2))
+def test_arbiter_section():
+    e = Exercise("Top Exercise", 4)
 
-#     print(section)
+    e.mark(
+        NullMarker().null_mark(2, 2)
+    ).sub(
+        Exercise("SubExercise", 2).
+        mark(NullMarker().null_mark(2, 2))
+    )
 
-#     assert(False)
+    assert(e.running_out_of == 4)

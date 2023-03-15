@@ -33,7 +33,6 @@ class Exercise():
 
     ## Check that everything adds up
     def check(self):
-        print(self)
         if not self.will_check():
             raise Exception(f"Check fails: Max score is {self.running_out_of}, expected {self.out_of}")
         return self
