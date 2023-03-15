@@ -16,6 +16,30 @@ def test_null_marker():
     assert(null.results[0].score == 2)
 
 
+def test_checker_simple():
+    e = Exercise("Simple", 10)
+
+    assert(e.running_out_of == 0)
+
+    e.mark(
+        NullMarker().
+        null_mark(2, 0).
+        null_mark(2, 0)
+    )
+
+    print(e)
+    assert(e.running_out_of == 4)
+
+    assert(not e.will_check())
+
+    e.mark(
+        NullMarker().
+        null_mark(6, 0)
+    )
+
+    assert(e.will_check())
+
+
 # def test_arbiter_section():
 #     section = Section(
 #         "Simple Exercise", 10

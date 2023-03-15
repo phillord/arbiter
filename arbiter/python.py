@@ -1,4 +1,5 @@
-from .util import FileMarker
+from . import Result
+from .util import FileMarker, match_to_string
 
 import subprocess
 
@@ -23,7 +24,7 @@ class RunMarker(FileMarker):
         if isinstance(args, list):
             _args.extend(args)
 
-        self._completed_process = subprocess.run(
+        self.completed_process = subprocess.run(
             _args, capture_output=True
         )
 
@@ -33,10 +34,38 @@ class RunMarker(FileMarker):
         self._subprocess(True, args)
         return self
 
-    @property
-    def success(self):
-        return self._completed_process.returncode == 0
+    def success(self, score_out_of, score_success, score_failure):
+        if self.completed_process.returncode == 0:
+            self.result(
+                Result(
+                    out_of=score_out_of,score=score_success,
+                    feedback=f"The file \"{self.filename}\" executed"
+                )
+            )
+        else:
+            self.result(
+                Result(
+                    out_of=score_out_of,score=score_failure,
+                    feedback=f"The file \"{self.filename}\" failed to execute"
+                )
+            )
 
-    @property
-    def returncode(self):
-        return self._completed_process.returncode
+        return self
+
+    def match_stdout(self, match, score_out_of, score_matches, score_does_not_match):
+        if match_to_string(self.completed_process.stdout, match):
+            self.result(
+                Result(
+                    out_of=score_out_of, score=score_matches,
+                    feedback=f"The standard output matches {match}"
+                )
+            )
+        else:
+            self.result(
+                Result(
+                    out_of=score_out_of, score=score_does_not_match,
+                    feedback=f"The standard output does not match {match}"
+                )
+            )
+
+        return self

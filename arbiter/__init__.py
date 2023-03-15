@@ -32,9 +32,26 @@ class Exercise():
         return self
 
     ## Check that everything adds up
-    def check():
-        pass
+    def check(self):
+        print(self)
+        if not self.will_check():
+            raise Exception(f"Check fails: Max score is {self.running_out_of}, expected {self.out_of}")
+        return self
 
+    def will_check(self):
+        return self.running_out_of == self.out_of
+
+    @property
+    def running_out_of(self):
+        scores = [
+            (x.out_of if isinstance(x, Result) else x.running_out_of)
+            for x in self.results
+        ]
+        return sum(scores)
+
+
+    def report(self):
+        return Report(self)
 
 ## Base class for Markers. Builder interface but with an "results"
 ## method which returns a list of results

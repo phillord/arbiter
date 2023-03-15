@@ -1,8 +1,10 @@
 from . import Marker, Result
+from re import Pattern
 import os
 import platform
 import subprocess
 import sys
+
 
 ## Checker that looks for the existance of files
 class FileMarker(Marker):
@@ -38,6 +40,17 @@ class FileMarker(Marker):
         system_open(self.filename)
 
         return self
+
+
+def match_to_string(s, match):
+    if isinstance(match, str):
+        return match in s
+
+    if isinstance(match, Pattern):
+        return match.search(s)
+
+    if callable(match):
+        return match(s)
 
 
 def system_open(filename):

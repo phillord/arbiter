@@ -4,16 +4,16 @@ from arbiter.python import RunMarker
 def direct_match():
     e = Exercise("Simple Exercise", 10)
 
-    ## Add a single exercise
+    ## Add a single marker
     e.mark(
         ## Check based on Running the code
         RunMarker("hello_world.py")
         ## Run it
         .python()
         ## Get the stdout
-        .stdout(
+        .match_stdout(
             ## Check that we return hello
-            Equals("Hello World", "You program outputs \"Hello World\" as required", 10, 0)
+            b"Hello World", 10, 10, 0
         )
     ).check()
 
