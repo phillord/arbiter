@@ -1,11 +1,11 @@
+#!/usr/bin/env python3
 from arbiter import Exercise
 from arbiter.python import RunMarker
 
 def direct_match():
     e = Exercise("Simple Exercise", 10)
 
-    ## Add a single marker
-    e.mark(
+    r =  (
         ## Check based on Running the code
         RunMarker("hello_world.py")
         ## Run it
@@ -13,8 +13,13 @@ def direct_match():
         ## Get the stdout
         .match_stdout(
             ## Check that we return hello
-            b"Hello World", 10, 10, 0
+            b"Hello World\n", 10, 10, 0
         )
+    )
+
+    ## Add a single marker
+    e.mark(
+        r
     ).check()
 
     return e.report()
@@ -65,3 +70,7 @@ def match_with_run_check():
     ).check()
 
     return e.report()
+
+
+if __name__ == "__main__":
+    print(direct_match())

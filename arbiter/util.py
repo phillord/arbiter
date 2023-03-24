@@ -43,6 +43,9 @@ class FileMarker(Marker):
 
 
 def match_to_string(s, match):
+    if isinstance(match, bytes):
+        return match in s
+
     if isinstance(match, str):
         return match in s
 

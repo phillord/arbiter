@@ -82,6 +82,6 @@ class Marker():
 
 
 ## Class that turns exercise into some consumable format (nicely printed, JSON, what ever)
-class Report:
-    def __init__(self,exercise):
-        self.exercise = exercise
+@dataclass
+class Report():
+    exercise: Exercise
