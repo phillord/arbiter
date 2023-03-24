@@ -10,10 +10,10 @@ class RunMarker(FileMarker):
     def __init__(self, filename):
         super().__init__(filename)
 
-    def subprocess(self, args=[]):
-        return self._subprocess(False, args)
+    def subprocess(self, *args, **kargs):
+        return self._subprocess(False, *args, **kargs)
 
-    def _subprocess(self, is_python, args=[]):
+    def _subprocess(self, is_python, *args, **kargs):
         _args = [self.filename]
 
         if is_python:
@@ -25,13 +25,13 @@ class RunMarker(FileMarker):
             _args.extend(args)
 
         self.completed_process = subprocess.run(
-            _args, capture_output=True
+            _args, capture_output=True, **kargs
         )
 
         return self
 
-    def python(self, args=[]):
-        self._subprocess(True, args)
+    def python(self, *args, **kargs):
+        self._subprocess(True, *args, **kargs)
         return self
 
     def success(self, score_out_of, score_success, score_failure):

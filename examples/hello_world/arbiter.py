@@ -30,7 +30,7 @@ def complex_match():
         ## Run it
         .python()
         ## Get the stdout
-        .stdout(
+        .match_stdout(
             Match(
                 ["Hello World", "Your program outputs \"Hello World\" as required", 10],
                 ["hello world", "Your program is nearly correct but does not use upper case", 8],

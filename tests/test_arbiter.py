@@ -27,7 +27,6 @@ def test_checker_simple():
         null_mark(2, 0)
     )
 
-    print(e)
     assert(e.running_out_of == 4)
 
     assert(not e.will_check())
